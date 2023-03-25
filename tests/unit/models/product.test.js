@@ -1,8 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
-const mocks = require('../mocks');
-const responses = require('../mocks/responses');
+const mocks = require('./mocks');
+const responses = require('./mocks/responses');
 const { productModel } = require('../../../src/models');
 const connection = require('../../../src/db/connection');
 
@@ -46,6 +46,25 @@ describe('Testes da camada models', function () {
       // expect(productById2).to.be.deep.equal(responses.productById2);
       // const productById2 = await productModel.getProductById(3);
       // expect(productById2).to.be.deep.equal(responses.productById2);
+    });
+  });
+
+  describe('testa a função registerNewProduct', function () {
+    beforeEach(() => {
+      // arrange
+      sinon.stub(connection, 'execute').resolves({ insertId: 4 });
+    });
+
+    afterEach(() => {
+      // arrange
+      connection.execute.restore();
+    });
+
+    it('testa o retorno da função', async function () {
+      // act
+      const newProductId = await productModel.registerNewProduct(mocks.newProduct);
+      // assert
+      expect(newProductId).to.be.deep.equal(responses.newProductId);
     });
   });
 });

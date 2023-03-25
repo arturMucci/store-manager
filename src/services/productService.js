@@ -12,7 +12,14 @@ async function getProductById(id) {
   return productById;
 }
 
+async function registerNewProduct(product) {
+  const newProduct = await productModel.registerNewProduct(product);
+  if (!newProduct.id) throw createError();
+  return newProduct;
+}
+
 module.exports = {
   getAllProducts,
   getProductById,
+  registerNewProduct,
 };

@@ -11,6 +11,10 @@ const responses = {
     id: 3,
     name: 'Escudo do Capitão América',
   },
+  newProductId: {
+    id: 4,
+    name: 'ProdutoX',
+  },
 };
 
 module.exports = responses;

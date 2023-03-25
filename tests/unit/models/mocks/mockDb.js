@@ -13,4 +13,11 @@ const database = [
   },
 ];
 
-module.exports = database;
+const newProduct = {
+  name: 'ProdutoX',
+};
+
+module.exports = {
+  database,
+  newProduct,
+};
