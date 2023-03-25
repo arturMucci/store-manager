@@ -1,10 +1,23 @@
 const express = require('express');
 const { productController } = require('../controllers');
+const middlewares = require('../middlewares');
 
 const productRouter = express.Router();
 
-productRouter.post('/', productController.registerNewProduct);
-productRouter.get('/:id', productController.getProductById);
-productRouter.get('/', productController.getAllProducts);
+productRouter.get(
+  '/',
+  productController.getAllProducts,
+);
+
+productRouter.get(
+  '/:id',
+  productController.getProductById,
+);
+
+productRouter.post(
+  '/',
+  middlewares.validateName,
+  productController.registerNewProduct,
+);
 
 module.exports = productRouter;

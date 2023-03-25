@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
-const mocks = require('./mocks');
+const mocks = require('./mocks/mocks');
 const responses = require('./mocks/responses');
 const { productModel } = require('../../../src/models');
 const connection = require('../../../src/db/connection');
@@ -52,7 +52,7 @@ describe('Testes da camada models', function () {
   describe('testa a função registerNewProduct', function () {
     beforeEach(() => {
       // arrange
-      sinon.stub(connection, 'execute').resolves({ insertId: 4 });
+      sinon.stub(connection, 'execute').resolves({ insertId: 4});
     });
 
     afterEach(() => {

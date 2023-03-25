@@ -13,9 +13,8 @@ async function getProductById(id) {
 }
 
 async function registerNewProduct(product) {
-  const newProduct = await productModel.registerNewProduct(product);
-  if (!newProduct.id) throw createError();
-  return newProduct;
+  const newProductId = await productModel.registerNewProduct(product);
+  return newProductId;
 }
 
 module.exports = {
