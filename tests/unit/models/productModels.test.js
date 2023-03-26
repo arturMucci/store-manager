@@ -1,32 +1,17 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
-const mocks = require('./mocks/mocks');
-const responses = require('./mocks/responses');
 const { productModel } = require('../../../src/models');
+const mocks = require('../mocks/mocks');
+const responses = require('../mocks/responses');
 const connection = require('../../../src/db/connection');
 
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('Testes da camada models', function () {
-  describe('testa a função "getAllProducts"', function() {
-    afterEach(() => {
-      connection.execute.restore();
-    });
-
-    it('testa o retorno da função', async function () {
-      // arrange
-      sinon.stub(connection, 'execute').resolves([mocks.database]);
-      // act
-      const allProducts = await productModel.getAllProducts();
-      // assert
-      expect(allProducts).to.deep.equals(mocks.database);
-    });
-  });
-
-  describe('testa a função getProductsById', function () {
+describe('2 - Testes da camada models', function () {
+  describe('1 - Testa o retorno da função "getAllProducts"', function() {
     beforeEach(() => {
       // arrange
       sinon.stub(connection, 'execute').resolves([mocks.database]);
@@ -37,7 +22,26 @@ describe('Testes da camada models', function () {
       connection.execute.restore();
     });
 
-    it('testa o retorno da função', async function () {
+    it('1 - A função retona um array com todos os produtos cadastrados no banco', async function () {
+      // act
+      const allProducts = await productModel.getAllProducts();
+      // assert
+      expect(allProducts).to.deep.equals(mocks.database);
+    });
+  });
+
+  describe('2 - Testa o retorno da função "getProductsById"', function () {
+    beforeEach(() => {
+      // arrange
+      sinon.stub(connection, 'execute').resolves([mocks.database]);
+    });
+
+    afterEach(() => {
+      // arrange
+      connection.execute.restore();
+    });
+
+    it('1 - A função retorna o objeto correto de acordo com o id fornecido', async function () {
       // act
       const productById1 = await productModel.getProductById(1);
       // assert
@@ -49,10 +53,10 @@ describe('Testes da camada models', function () {
     });
   });
 
-  describe('testa a função registerNewProduct', function () {
+  describe('3 - Testa o retorno da função "registerNewProduct"', function () {
     beforeEach(() => {
       // arrange
-      sinon.stub(connection, 'execute').resolves({ insertId: 4});
+      sinon.stub(connection, 'execute').resolves([{ insertId: 4}]);
     });
 
     afterEach(() => {
@@ -60,11 +64,11 @@ describe('Testes da camada models', function () {
       connection.execute.restore();
     });
 
-    it('testa o retorno da função', async function () {
+    it('1 - A função retorna o id do novo produto cadastrado no banco', async function () {
       // act
       const newProductId = await productModel.registerNewProduct(mocks.newProduct);
       // assert
-      expect(newProductId).to.be.deep.equal(responses.newProductId);
+      expect(newProductId).to.be.deep.equal(4);
     });
   });
 });

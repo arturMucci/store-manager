@@ -1,4 +1,18 @@
 const responses = {
+  database: [
+    {
+      id: 1,
+      name: 'Martelo de Thor',
+    },
+    {
+      id: 2,
+      name: 'Traje de encolhimento',
+    },
+    {
+      id: 3,
+      name: 'Escudo do Capitão América',
+    },
+  ],
   productById1: {
     id: 1,
     name: 'Martelo de Thor',
@@ -11,7 +25,7 @@ const responses = {
     id: 3,
     name: 'Escudo do Capitão América',
   },
-  newProductId: {
+  newProductWithId: {
     id: 4,
     name: 'ProdutoX',
   },

@@ -18,7 +18,7 @@ async function getProductById(req, res, next) {
 async function registerNewProduct(req, res, next) {
   try {
     const { name } = req.body;
-    const { insertId } = await productService.registerNewProduct(name);
+    const insertId = await productService.registerNewProduct(name);
     return res.status(201).json({ id: insertId, name });
   } catch (error) {
     return next(error);
