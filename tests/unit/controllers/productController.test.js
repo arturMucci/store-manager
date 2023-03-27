@@ -3,16 +3,16 @@ const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const { productService } = require('../../../src/services');
 const { productController } = require('../../../src/controllers');
-const mocks = require('../mocks/mocks');
+const mocks = require('../mocks/productMocks');
 const sinonChai = require('sinon-chai');
-const responses = require('../mocks/responses');
+const responses = require('../mocks/productResponses');
 
 chai.use(sinonChai);
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('1 - Testes da camada controller', function () {
+describe('1 - Testes da camada controller no endpoint "/products"', function () {
   describe('1 - Testa o retorno da função "getAllProducts"', function () {
     afterEach(async () => {
       // arrange

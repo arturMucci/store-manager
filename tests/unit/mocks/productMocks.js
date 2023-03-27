@@ -1,4 +1,4 @@
-const database = [
+const productTable = [
   {
     id: 1,
     name: 'Martelo de Thor',
@@ -18,6 +18,6 @@ const newProduct = {
 };
 
 module.exports = {
-  database,
+  productTable,
   newProduct,
 };

@@ -20,4 +20,11 @@ productRouter.post(
   productController.registerNewProduct,
 );
 
+productRouter.put(
+  '/:id',
+  middlewares.validateName,
+  middlewares.validateProductId,
+  productController.updateProductById,
+  );
+
 module.exports = productRouter;

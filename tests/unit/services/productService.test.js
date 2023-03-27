@@ -3,19 +3,19 @@ const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const { productModel } = require('../../../src/models');
 const { productService } = require('../../../src/services');
-const mocks = require('../mocks/mocks');
-const responses = require('../mocks/responses');
+const mocks = require('../mocks/productMocks');
+const responses = require('../mocks/productResponses');
 const createError = require('http-errors');
 
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('3 - Testes da camada services', function () {
+describe('4 - Testes da camada services no endpoint "/products"', function () {
   describe('1 - Testa o retorno da função "getAllProducts"', function () {
     beforeEach(() => {
       // arrange
-      sinon.stub(productModel, 'getAllProducts').resolves(mocks.database);
+      sinon.stub(productModel, 'getAllProducts').resolves(mocks.productTable);
     });
 
     afterEach(() => {
@@ -27,7 +27,7 @@ describe('3 - Testes da camada services', function () {
       // act
       const allProducts = await productService.getAllProducts();
       // assert
-      expect(allProducts).to.deep.equals(responses.database);
+      expect(allProducts).to.deep.equals(responses.productTable);
     });
   });
 
@@ -66,7 +66,7 @@ describe('3 - Testes da camada services', function () {
     beforeEach(async () => {
       // arrange
       sinon.stub(productModel, 'registerNewProduct').resolves(4);
-      sinon.stub(productModel, 'getProductById').resolves(mocks.database[3]);
+      sinon.stub(productModel, 'getProductById').resolves(mocks.productTable[3]);
     });
 
     afterEach(async () => {

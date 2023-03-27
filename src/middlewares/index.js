@@ -1,9 +1,9 @@
+const errorHandler = require('./errorHandler');
 const validateName = require('./validateName');
 const validateProductId = require('./validateProductId');
-const validateQuantity = require('./validateQuantity');
 
 module.exports = {
+  errorHandler,
   validateName,
   validateProductId,
-  validateQuantity,
 };
