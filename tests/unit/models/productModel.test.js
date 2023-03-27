@@ -1,5 +1,4 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const { productModel } = require('../../../src/models');
 const mocks = require('../mocks/productMocks');
@@ -7,8 +6,6 @@ const responses = require('../mocks/productResponses');
 const connection = require('../../../src/db/connection');
 
 const { expect } = chai;
-
-chai.use(chaiHttp);
 
 describe('2 - Testes da camada models no endpoint "/products"', function () {
   describe('1 - Testa o retorno da função "getAllProducts"', function() {
@@ -69,6 +66,22 @@ describe('2 - Testes da camada models no endpoint "/products"', function () {
       const newProductId = await productModel.registerNewProduct(mocks.newProduct);
       // assert
       expect(newProductId).to.be.deep.equal(4);
+    });
+  });
+
+  describe('4 - Testa o retorno da função "updateProductById"', function () {
+    beforeEach(() => {
+      // arrange
+      sinon.stub(connection, 'execute').resolves();
+    });
+
+    afterEach(async function () {
+      //arrange
+      connection.execute.restore();
+    });
+
+    it('', async function () {
+
     });
   });
 });

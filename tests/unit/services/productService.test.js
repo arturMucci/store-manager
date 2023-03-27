@@ -1,5 +1,4 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const { productModel } = require('../../../src/models');
 const { productService } = require('../../../src/services');
@@ -8,8 +7,6 @@ const responses = require('../mocks/productResponses');
 const createError = require('http-errors');
 
 const { expect } = chai;
-
-chai.use(chaiHttp);
 
 describe('4 - Testes da camada services no endpoint "/products"', function () {
   describe('1 - Testa o retorno da função "getAllProducts"', function () {

@@ -1,20 +1,18 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
 const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 const { productService } = require('../../../src/services');
 const { productController } = require('../../../src/controllers');
 const mocks = require('../mocks/productMocks');
-const sinonChai = require('sinon-chai');
 const responses = require('../mocks/productResponses');
 
 chai.use(sinonChai);
-chai.use(chaiHttp);
 
 const { expect } = chai;
 
 describe('1 - Testes da camada controller no endpoint "/products"', function () {
   describe('1 - Testa o retorno da função "getAllProducts"', function () {
-    afterEach(async () => {
+    afterEach(async function () {
       // arrange
       productService.getAllProducts.restore();
     });
@@ -33,14 +31,14 @@ describe('1 - Testes da camada controller no endpoint "/products"', function () 
       // act
       await productController.getAllProducts(req, res);
 
-      //assert
+      // assert
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(mocks.database);
     });
   });
 
   describe('2 - Testa o retorno da função "getProductById"', function () {
-    afterEach(async () => {
+    afterEach(async function () {
       // arrange
       productService.getProductById.restore();
     });
@@ -66,16 +64,16 @@ describe('1 - Testes da camada controller no endpoint "/products"', function () 
   });
 
   describe('3 - Testa o retorno da função "registerNewProduct"', function () {
-    afterEach(async () => {
+    afterEach(async function () {
       // arrange
       productService.registerNewProduct.restore();
     });
 
     it('1 - A função response status 201 e o objeto com o produto cadastrado', async function () {
       // arrange
-      const req = { body: {name: 'ProdutoX' } };
+      const req = { body: { name: 'ProdutoX' } };
       const res = {};
-      const next = function() {};
+      const next = function () {};
 
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
@@ -89,6 +87,13 @@ describe('1 - Testes da camada controller no endpoint "/products"', function () 
       // assert
       expect(res.status).to.have.been.calledWith(201);
       expect(res.json).to.have.been.calledWith({ id: 4, name: 'ProdutoX' });
+    });
+  });
+
+  describe('4 - Testa o retorno da função "updateProductById"', function () {
+    afterEach(async function () {
+      //arrange
+
     });
   });
 });
